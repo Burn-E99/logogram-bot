@@ -1,0 +1,1 @@
+# Logogram Discord Bot - A FFXIV Eureka Utility Bot | V0.0.0 - 2025/09/02
