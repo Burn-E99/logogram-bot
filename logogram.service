@@ -1,0 +1,14 @@
+[Unit]
+Description=Logogram Discord Bot
+Documentation=https://git.milligan.dev/xivdev/logogram-bot
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/run/deno.pid
+ExecStart=/root/.deno/bin/deno run --allow-write=./logs/ --allow-net /var/dbots/logogram-bot/mod.ts
+RestartSec=60
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

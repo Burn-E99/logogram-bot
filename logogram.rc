@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# PROVIDE: logogram
+
+. /etc/rc.subr
+
+name="logogram"
+rcvar="logogram_enable"
+pidfile="/var/dbots/logogram-bot/logogram-bot.pid"
+
+logogram_root="/var/dbots/logogram-bot"
+logogram_write="./logs/"
+logogram_log="/var/log/logogram-bot.log"
+
+logogram_chdir="${logogram_root}"
+command="/usr/sbin/daemon"
+command_args="-f -R 5 -P ${pidfile} -o ${logogram_log} /usr/local/bin/deno run --allow-write=${logogram_write} --allow-net ${logogram_root}/mod.ts"
+
+load_rc_config logogram
+run_rc_command "$1"
