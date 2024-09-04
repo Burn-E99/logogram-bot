@@ -44,21 +44,35 @@ const getMnemeEmoji = (id: string): string => {
   }
 };
 
+const getActionUses = (uses: number): string => uses === Infinity ? '∞' : `${uses}`;
+const getActionCast = (cast: number): string => cast === 0 ? 'Instant' : `${cast}s`;
 const getHumanDuration = (duration: number) => {
   if (duration < 60) {
     return `${duration}s`;
   } else if (duration < (60 * 60)) {
     return `${Math.round(duration / 60 * 10) / 10}m`;
   } else {
-    return `${Math.round(duration / 60 / 60 * 10) / 10}h`
+    return `${Math.round(duration / 60 / 60 * 10) / 10}h`;
   }
+};
+
+const getJobs = (jobs: Array<string>): string => {
+  let jobIcons = '';
+
+  if (jobs.includes('tank') || jobs[0].startsWith('all')) jobIcons += config.jobType.tank;
+  if (jobs.includes('healer') || jobs[0].startsWith('all')) jobIcons += config.jobType.healer;
+  if (jobs.includes('melee') || jobs[0].startsWith('all')) jobIcons += config.jobType.melee;
+  if (jobs.includes('ranged') || jobs[0].startsWith('all')) jobIcons += config.jobType.ranged;
+  if (jobs.includes('magic') || jobs[0].startsWith('all')) jobIcons += config.jobType.magic;
+  if (jobs.includes('all-nin')) jobIcons += ' (Excludes Ninja)';
+
+  return jobIcons;
 };
 
 const generateActionEmbed = (action: LogosAction): Embed => ({
   title: action.name,
-  description: `**${action.type}** | ${action.duration ? `**Duration:** ${getHumanDuration(action.duration)} | ` : ''}**Uses:** ${action.uses === Infinity ? '∞' : action.uses} | **Cast:** ${
-    action.cast === 0 ? 'Instant' : `${action.cast}s`
-  } | **Recast:** ${action.recast}s
+  description: `**${action.type}** | ${action.duration ? `**Duration:** ${getHumanDuration(action.duration)} | ` : ''}**Uses:** ${getActionUses(action.uses)} | **Cast:** ${getActionCast(action.cast)} | **Recast:** ${action.recast}s
+${getJobs(action.jobs)}
 ${action.description}`,
   thumbnail: {
     url: `${config.imageUrl}${action.imageId}.png`,
