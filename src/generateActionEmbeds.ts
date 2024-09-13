@@ -69,7 +69,7 @@ const getJobs = (jobs: Array<string>): string => {
   return jobIcons;
 };
 
-const generateActionEmbed = (action: LogosAction): Embed => ({
+const generateActionEmbed = (action: LogosAction, debug: boolean): Embed => ({
   title: action.name,
   description: `**${action.type}** | ${action.duration ? `**Duration:** ${getHumanDuration(action.duration)} | ` : ''}**Uses:** ${getActionUses(action.uses)} | **Cast:** ${getActionCast(action.cast)} | **Recast:** ${action.recast}s
 ${getJobs(action.jobs)}
@@ -82,6 +82,9 @@ ${action.description}`,
     value: combo.map((mneme) => `${getMnemeEmoji(mneme)} ${data.Mnemes.get(mneme)}`).join('\n'),
     inline: true,
   })),
+  footer: {
+    text: debug ? `Internal ID: ${action.imageId - 1}` : '',
+  },
 });
 
-export const generateEmbeds = (actions: Array<number>): Array<Embed> => actions.map((actionIdx) => generateActionEmbed(data.Actions[actionIdx]));
+export const generateEmbeds = (actions: Array<number>, debug: boolean): Array<Embed> => actions.map((actionIdx) => generateActionEmbed(data.Actions[actionIdx], debug));

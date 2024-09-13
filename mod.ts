@@ -107,39 +107,50 @@ startBot({
 						rawClass: '',
 						isNin: false,
 						page: 1,
+						debug: false,
 					};
 
 					const classPrefixes = ['-class=', 'class=', '-c=', 'c='];
 					const pagePrefixes = ['-page=', 'page=', '-p=', 'p='];
+					const debugPrefixes = ['-debug=', 'debug=', '-d=', 'd='];
+					const allPrefixes = classPrefixes.concat(pagePrefixes).concat(debugPrefixes);
 
 					args.forEach((arg) => {
-						if (classPrefixes.some(pfx => arg.toLowerCase().startsWith(pfx))) { //
+						if (classPrefixes.some((pfx) => arg.toLowerCase().startsWith(pfx))) { //
 							params.rawClass = arg.split('=')[1];
 							params.class = classToType(params.rawClass);
 							params.isNin = params.rawClass.toLowerCase() === 'nin';
-						} else if (pagePrefixes.some(pfx => arg.toLowerCase().startsWith(pfx))) {
+						} else if (pagePrefixes.some((pfx) => arg.toLowerCase().startsWith(pfx))) {
 							params.page = parseInt(arg.split('=')[1]);
+						} else if (debugPrefixes.some((pfx) => arg.toLowerCase().startsWith(pfx))) {
+							params.debug = true;
 						}
 					});
 
-					const cleanArgs = args.filter((arg) => !(classPrefixes.concat(pagePrefixes).some(pfx => arg.toLowerCase().startsWith(pfx))));
+					const cleanArgs = args.filter((arg) => !(allPrefixes.some((pfx) => arg.toLowerCase().startsWith(pfx))));
 					const rawQuery = cleanArgs.join(' ');
 					const query = rawQuery.toLowerCase();
 
 					if (data.ActionNames.includes(query)) {
 						const singleAction: Array<number> = [data.ActionNames.indexOf(query)];
 						message.send({
-							content: `Showing single action:`,
-							embeds: generateEmbeds(singleAction),
+							content: 'Showing single action:',
+							embeds: generateEmbeds(singleAction, params.debug),
+						}).catch((e) => {
+							log(LT.ERROR, `Failed to send message: ${JSON.stringify(message)} | ${JSON.stringify(e)}`);
+						});
+					} else if (data.ActionShortNames.includes(query)) {
+						const searchResults: Array<number> = data.Actions.filter((action) => action.shorthand === query).map((action) => data.ActionNames.indexOf(action.name.toLowerCase()));
+						message.send({
+							content: searchResults.length > 1 ? `Showing ${searchResults.length} actions:` : 'Showing single action:',
+							embeds: generateEmbeds(searchResults, params.debug),
 						}).catch((e) => {
 							log(LT.ERROR, `Failed to send message: ${JSON.stringify(message)} | ${JSON.stringify(e)}`);
 						});
 					} else {
 						const initialSearchResults: Array<number> = data.ActionNames.filter((action) => action.includes(query)).map((action) => data.ActionNames.indexOf(action));
 						const searchResults: Array<number> = initialSearchResults.filter((actionIdx) =>
-							params.class
-								? (data.Actions[actionIdx].jobs.includes('all-nin') && !params.isNin) || data.Actions[actionIdx].jobs.includes('all') || data.Actions[actionIdx].jobs.includes(params.class)
-								: true
+							params.class ? (data.Actions[actionIdx].jobs.includes('all-nin') && !params.isNin) || data.Actions[actionIdx].jobs.includes('all') || data.Actions[actionIdx].jobs.includes(params.class) : true
 						);
 
 						if (searchResults.length) {
@@ -154,7 +165,7 @@ startBot({
 								: '';
 							message.send({
 								content: `${searchResults.length} result${searchResults.length > 1 ? 's' : ''} matching query: \`${userQuery}\`${paginationMessage}`,
-								embeds: generateEmbeds(searchResults.slice((params.page - 1) * config.resultsPerPage, config.resultsPerPage * params.page)),
+								embeds: generateEmbeds(searchResults.slice((params.page - 1) * config.resultsPerPage, config.resultsPerPage * params.page), params.debug),
 							}).catch((e) => {
 								log(LT.ERROR, `Failed to send message: ${JSON.stringify(message)} | ${JSON.stringify(e)}`);
 							});
@@ -177,7 +188,7 @@ startBot({
 					const preset: Array<number> = data.Presets.get(query) ?? [];
 					message.send({
 						content: `Showing ${rawQuery} Preset:`,
-						embeds: generateEmbeds(preset),
+						embeds: generateEmbeds(preset, false),
 					}).catch((e) => {
 						log(LT.ERROR, `Failed to send message: ${JSON.stringify(message)} | ${JSON.stringify(e)}`);
 					});

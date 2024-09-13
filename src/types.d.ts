@@ -2,6 +2,7 @@ export type LogosAction = {
   name: string;
   description: string;
   imageId: number;
+  shorthand: string;
   type: string;
   uses: number;
   duration?: number;
