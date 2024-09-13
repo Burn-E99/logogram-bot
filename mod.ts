@@ -109,17 +109,20 @@ startBot({
 						page: 1,
 					};
 
+					const classPrefixes = ['-class=', 'class=', '-c=', 'c='];
+					const pagePrefixes = ['-page=', 'page=', '-p=', 'p='];
+
 					args.forEach((arg) => {
-						if (arg.toLowerCase().startsWith('-class=')) {
+						if (classPrefixes.some(pfx => arg.toLowerCase().startsWith(pfx))) { //
 							params.rawClass = arg.split('=')[1];
 							params.class = classToType(params.rawClass);
 							params.isNin = params.rawClass.toLowerCase() === 'nin';
-						} else if (arg.toLowerCase().startsWith('-page=')) {
+						} else if (pagePrefixes.some(pfx => arg.toLowerCase().startsWith(pfx))) {
 							params.page = parseInt(arg.split('=')[1]);
 						}
 					});
 
-					const cleanArgs = args.filter((arg) => !(arg.toLowerCase().startsWith('-class=') || arg.toLowerCase().startsWith('-page=')));
+					const cleanArgs = args.filter((arg) => !(classPrefixes.concat(pagePrefixes).some(pfx => arg.toLowerCase().startsWith(pfx))));
 					const rawQuery = cleanArgs.join(' ');
 					const query = rawQuery.toLowerCase();
 

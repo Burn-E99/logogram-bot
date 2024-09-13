@@ -745,6 +745,13 @@ const Actions: Array<LogosAction> = [
   },
 ];
 
+// add dps flag at runtime
+Actions.forEach(action => {
+  if (action.jobs.includes('melee') || action.jobs.includes('ranged') || action.jobs.includes('magic')) {
+    action.jobs.push('dps');
+  }
+});
+
 const ActionNames = Actions.map((action) => action.name.toLowerCase());
 
 const Presets: Map<string, Array<number>> = new Map([

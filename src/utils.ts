@@ -1,5 +1,7 @@
 export const classToType = (classAbr: string) => {
   switch (classAbr.toLowerCase()) {
+    case 'dps':
+      return 'dps';
     case 'tank':
     case 'pld':
     case 'war':
