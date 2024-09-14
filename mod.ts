@@ -138,6 +138,7 @@ startBot({
 					const query = rawQuery.toLowerCase();
 
 					if (data.ActionNames.includes(query)) {
+						log(LT.LOG, `in name matched '${query}'`);
 						const singleAction: Array<number> = [data.ActionNames.indexOf(query)];
 						message.send({
 							content: 'Showing single action:',
@@ -145,7 +146,8 @@ startBot({
 						}).catch((e) => {
 							log(LT.ERROR, `Failed to send message: ${JSON.stringify(message)} | ${JSON.stringify(e)}`);
 						});
-					} else if (data.ActionShortNames.includes(query)) {
+					} else if (query && data.ActionShortNames.includes(query)) {
+						log(LT.LOG, `in shorthand matched '${query}'`);
 						const searchResults: Array<number> = data.Actions.filter((action) => action.shorthand === query).map((action) => data.ActionNames.indexOf(action.name.toLowerCase()));
 						message.send({
 							content: searchResults.length > 1 ? `Showing ${searchResults.length} actions:` : 'Showing single action:',
@@ -154,6 +156,7 @@ startBot({
 							log(LT.ERROR, `Failed to send message: ${JSON.stringify(message)} | ${JSON.stringify(e)}`);
 						});
 					} else {
+						log(LT.LOG, `in general search '${query}'`);
 						const initialSearchResults: Array<number> = data.ActionNames.filter((action) => action.includes(query)).map((action) => data.ActionNames.indexOf(action));
 						const searchResults: Array<number> = initialSearchResults.filter((actionIdx) =>
 							params.class ? (data.Actions[actionIdx].jobs.includes('all-nin') && !params.isNin) || data.Actions[actionIdx].jobs.includes('all') || data.Actions[actionIdx].jobs.includes(params.class) : true
