@@ -1,4 +1,4 @@
-# Logogram Discord Bot - A FFXIV Eureka Utility Bot | V1.1.2 - 2025/09/13
+# Logogram Discord Bot - A FFXIV Eureka Utility Bot | V1.1.3 - 2025/09/14
 A Discord bot for Eureka Logos Actions and their recipes.
 
 ## Commands
@@ -14,6 +14,8 @@ A Discord bot for Eureka Logos Actions and their recipes.
       - Use to view more search results
 - `preset` or `p`
   - Shows a pre-made list of actions for convenient viewing
+- `flowchart` or `flow` or `f`
+  - Shows a simple flowchart for best actions
 - `info` or `i`
   - Shows info about bot
 - `version` or `v`

@@ -94,6 +94,12 @@ startBot({
 				message.send(constantCmds.version).catch((e) => {
 					log(LT.ERROR, `Failed to send message: ${JSON.stringify(message)} | ${JSON.stringify(e)}`);
 				});
+			} else if (command === 'flowchart' || command === 'flow' || command === 'f') {
+				// l!flowchart or l!flow or l!logos or l!f
+				// Returns logos actions stuff
+				message.send(constantCmds.flowchart).catch((e) => {
+					log(LT.ERROR, `Failed to send message: ${JSON.stringify(message)} | ${JSON.stringify(e)}`);
+				});
 			} else if (command === 'logograms' || command === 'logogram' || command === 'logos' || command === 'logo' || command === 'l') {
 				// l!logograms or l!logograms or l!logos or l!logo or l!l
 				// Returns logos actions stuff

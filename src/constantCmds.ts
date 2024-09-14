@@ -32,6 +32,11 @@ export const constantCmds = {
 					value: 'Sends information about the requested preset list',
 					inline: true,
 				},
+				{
+					name: `\`${config.prefix}flowchart]\` or \`${config.prefix}f\``,
+					value: 'Shows a simple flowchart for best actions',
+					inline: true,
+				},
 			],
 		}],
 	},
@@ -55,4 +60,5 @@ export const constantCmds = {
 			description: `Please type something after the command, such as \`${config.prefix}logos wisdom\`.`,
 		}],
 	},
+	flowchart: 'https://ffxiv.eanm.dev/eureka/Simple-Logos-Flowchart.png',
 };
