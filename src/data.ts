@@ -811,6 +811,7 @@ const ActionShortNames = Actions.map((action) => action.shorthand);
 const Presets: Map<string, Array<number>> = new Map([
   ['dps', [9, 10, 52, 14, 48]],
   ['pl', [50, 13, 44, 39]],
+  ['ranged', [9, 10, 8, 14, 49]]
 ]);
 
 export default {
