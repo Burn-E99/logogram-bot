@@ -809,9 +809,14 @@ const ActionNames = Actions.map((action) => action.name.toLowerCase());
 const ActionShortNames = Actions.map((action) => action.shorthand);
 
 const Presets: Map<string, Array<number>> = new Map([
+  ['tank', [9, 10, 3, 54, 1, 14, 48]],
+  ['healer', [9, 10, 7, 0, 44, 39, 55]],
   ['dps', [9, 10, 52, 14, 48]],
-  ['pl', [50, 13, 44, 39]],
-  ['ranged', [9, 10, 8, 14, 49]]
+  ['melee', [9, 10, 52, 14, 48]],
+  ['ranged', [9, 10, 8, 14, 49]],
+  ['caster', [9, 10, 51, 47]],
+  ['pl', [50, 13, 44, 39, 19, 22]],
+  ['misc', [12, 11, 13, 16]],
 ]);
 
 export default {

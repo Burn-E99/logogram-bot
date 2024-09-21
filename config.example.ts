@@ -1,6 +1,6 @@
 export const config = {
 	'name': 'Logogram Bot', // Name of the bot
-	'version': '1.1.5', // Version of the bot
+	'version': '1.1.6', // Version of the bot
 	'token': 'the_bot_token', // Discord API Token for this bot
 	'localToken': 'local_testing_token', // Discord API Token for a secondary OPTIONAL testing bot, THIS MUST BE DIFFERENT FROM "token"
 	'prefix': 'l!', // Prefix for all commands
