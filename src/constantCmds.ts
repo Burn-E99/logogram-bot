@@ -25,8 +25,7 @@ export const constantCmds = {
           },
           {
             name: `\`${config.prefix}logograms [query]\` or \`${config.prefix}l [query]\``,
-            value:
-              'Sends information about the requested logogram, or logograms matching the query\nCan use `-class=abbr` to further filter the results, or `-page=#` to view more results',
+            value: 'Sends information about the requested logogram, or logograms matching the query\nCan use `-class=abbr` to further filter the results, or `-page=#` to view more results',
             inline: true,
           },
           {

@@ -14,7 +14,7 @@ logogram_log="/var/log/logogram-bot.log"
 
 logogram_chdir="${logogram_root}"
 command="/usr/sbin/daemon"
-command_args="-f -R 5 -P ${pidfile} -o ${logogram_log} /usr/local/bin/deno run --allow-write=${logogram_write} --allow-net ${logogram_root}/mod.ts"
+command_args="-f -R 5 -P ${pidfile} -o ${logogram_log} /usr/local/bin/deno run --allow-write=${logogram_write} --allow-net --allow-import ${logogram_root}/mod.ts"
 
 load_rc_config logogram
 run_rc_command "$1"

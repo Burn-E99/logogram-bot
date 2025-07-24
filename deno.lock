@@ -1,5 +1,5 @@
 {
-  "version": "3",
+  "version": "4",
   "remote": {
     "https://deno.land/std@0.99.0/encoding/base64.ts": "eecae390f1f1d1cae6f6c6d732ede5276bf4b9cd29b1d281678c054dc5cc009e",
     "https://deno.land/x/discordeno@12.0.1/mod.ts": "9c4187b459f479e23a77b0e7f0e24507a10729c7865b5c18113e79b1fbf0effa",
@@ -536,6 +536,9 @@
     "https://raw.githubusercontent.com/Burn-E99/Log4Deno/V1.1.1/deps.ts": "4932522dd8d38cc322df6508d4f2e55e5fb0ec15e54fcdc81e2bf10051021608",
     "https://raw.githubusercontent.com/Burn-E99/Log4Deno/V1.1.1/mod.ts": "d9c38a41a405cf5732c9233c2391a1d7f5a12d0e464aace6f8f596fabf5f21ba",
     "https://raw.githubusercontent.com/Burn-E99/Log4Deno/V1.1.1/src/logger.ts": "f6ba6f7fe254fc3227a3ad48fd7c2c3aaaec8c350f0246fb3eeff075c21dc7e5",
+    "https://raw.githubusercontent.com/Burn-E99/Log4Deno/V2.1.1/deps.ts": "3ab026026d146ca5e7160b16146d5665e45487a62749a7970f8e00c0c934874d",
+    "https://raw.githubusercontent.com/Burn-E99/Log4Deno/V2.1.1/mod.ts": "d9c38a41a405cf5732c9233c2391a1d7f5a12d0e464aace6f8f596fabf5f21ba",
+    "https://raw.githubusercontent.com/Burn-E99/Log4Deno/V2.1.1/src/logger.ts": "b3a39724d58102dfbcdcd640a829cbfe1f083065060f68003f9c8fd49fdd658a",
     "https://unpkg.com/@evan/wasm@0.0.65/target/zlib/deno.js": "36cd3f1edd2f3a6d6fd4c2376f701c2748338c132703810d4866cfa52b5e7bf9"
   }
 }

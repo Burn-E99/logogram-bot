@@ -1,1 +1,1 @@
-deno run --allow-net --allow-write=./logs/ ./mod.ts
+deno run --allow-write=./logs/ --allow-net --allow-import ./mod.ts

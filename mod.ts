@@ -158,9 +158,7 @@ startBot({
               });
           } else if (query && data.ActionShortNames.includes(query)) {
             log(LT.LOG, `in shorthand matched '${query}'`);
-            const searchResults: Array<number> = data.Actions.filter((action) => action.shorthand === query).map((action) =>
-              data.ActionNames.indexOf(action.name.toLowerCase())
-            );
+            const searchResults: Array<number> = data.Actions.filter((action) => action.shorthand === query).map((action) => data.ActionNames.indexOf(action.name.toLowerCase()));
             message
               .send({
                 content: searchResults.length > 1 ? `Showing ${searchResults.length} actions:` : 'Showing single action:',
@@ -171,9 +169,7 @@ startBot({
               });
           } else {
             log(LT.LOG, `in general search '${query}'`);
-            const initialSearchResults: Array<number> = data.ActionNames.filter((action) => action.includes(query)).map((action) =>
-              data.ActionNames.indexOf(action)
-            );
+            const initialSearchResults: Array<number> = data.ActionNames.filter((action) => action.includes(query)).map((action) => data.ActionNames.indexOf(action));
             const searchResults: Array<number> = initialSearchResults.filter((actionIdx) =>
               params.class
                 ? (data.Actions[actionIdx].jobs.includes('all-nin') && !params.isNin) ||
@@ -189,10 +185,9 @@ startBot({
               }
               const classMessage = params.class ? ` -class=${params.rawClass}` : '';
               const userQuery = `${rawQuery}${classMessage}`.trim();
-              const paginationMessage =
-                searchResults.length > config.resultsPerPage
-                  ? `\nShowing page ${params.page} of ${totalPages}\n\nTo see more results, please run \`${config.prefix}logos ${userQuery} -page=#\`, where # is the page number you wish to see.`
-                  : '';
+              const paginationMessage = searchResults.length > config.resultsPerPage
+                ? `\nShowing page ${params.page} of ${totalPages}\n\nTo see more results, please run \`${config.prefix}logos ${userQuery} -page=#\`, where # is the page number you wish to see.`
+                : '';
               message
                 .send({
                   content: `${searchResults.length} result${searchResults.length > 1 ? 's' : ''} matching query: \`${userQuery}\`${paginationMessage}`,
@@ -231,10 +226,12 @@ startBot({
         } else if (!query) {
           message
             .send({
-              content: `Available presets: ${data.Presets.keys()
-                .toArray()
-                .map((p) => `\`${p}\``)
-                .join(', ')}`,
+              content: `Available presets: ${
+                data.Presets.keys()
+                  .toArray()
+                  .map((p) => `\`${p}\``)
+                  .join(', ')
+              }`,
             })
             .catch((e) => {
               log(LT.ERROR, `Failed to send message: ${JSON.stringify(message)} | ${JSON.stringify(e)}`);
